@@ -22,8 +22,9 @@ import javax.swing.JTextField;
 
 public class MainFrame extends JFrame {
 
-    private static final int WIDTH = 400;
+    private static final int WIDTH = 500;
     private static final int HEIGHT = 320;
+    private Double sum = 0.0;
     // Текстовые поля для считывания значений переменных,
 // как компоненты, совместно используемые в различных методах
     private JTextField textFieldX;
@@ -37,11 +38,11 @@ public class MainFrame extends JFrame {
     // Контейнер для отображения радио-кнопок
     private Box hboxFormulaType = Box.createHorizontalBox();
     private int formulaId = 1;
-    // Формула №1 для рассчѐта
+    // Формула №1
     public Double calculate1(Double x, Double y, Double z) {
         return Math.pow((Math.pow(Math.sin(y) + y*y + Math.exp(Math.cos(y)),2) + Math.pow(Math.log10(z*z)+Math.sin(Math.PI*x*x) ,3)), 0.5 );
     }
-    // Формула №2 для рассчѐта
+    // Формула №2
     public Double calculate2(Double x, Double y, Double z) {
         return  (Math.pow(y, 0.5) * 3 * Math.pow(z, x)) / Math.sqrt(1 + Math.pow(y, 3));
     }
@@ -77,7 +78,7 @@ public class MainFrame extends JFrame {
         hboxFormulaType.add(Box.createHorizontalGlue());
         hboxFormulaType.setBorder(
                 BorderFactory.createLineBorder(Color.YELLOW));
-// Создать область с полями ввода для X и Y
+// Создать область с полями ввода для X и Y и Z
         JLabel labelForX = new JLabel("X:");
         textFieldX = new JTextField("0", 10);
         textFieldX.setMaximumSize(textFieldX.getPreferredSize());
@@ -106,7 +107,7 @@ public class MainFrame extends JFrame {
         hboxVariables.add(Box.createHorizontalGlue());
 // Создать область для вывода результата
         JLabel labelForResult = new JLabel("Результат:");
-//labelResult = new JLabel("0");
+
         textFieldResult = new JTextField("0", 10);
         textFieldResult.setMaximumSize(
                 textFieldResult.getPreferredSize());
@@ -148,7 +149,44 @@ public class MainFrame extends JFrame {
                 textFieldResult.setText("0");
             }
         });
+
+        JButton buttonMC = new JButton("MC");
+        JButton buttonMPlus = new JButton("M+");
+
+        buttonMC.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                sum = 0.0;
+                textFieldResult.setText("0");
+            }
+        });
+
+        buttonMPlus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                try {
+                    Double current = Double.parseDouble(textFieldResult.getText());
+                    sum += current;
+                    textFieldResult.setText(sum.toString());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(MainFrame.this,
+                            "Невозможно суммировать: " + e.getMessage(),
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         Box hboxButtons = Box.createHorizontalBox();
+
+        hboxButtons.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        /*hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.add(buttonCalc);
+        hboxButtons.add(Box.createHorizontalStrut(20));
+        hboxButtons.add(buttonReset);*/
+        hboxButtons.add(Box.createHorizontalStrut(20));
+        hboxButtons.add(buttonMC);
+        hboxButtons.add(Box.createHorizontalStrut(20));
+        hboxButtons.add(buttonMPlus);
+        hboxButtons.add(Box.createHorizontalGlue());
+
         hboxButtons.add(Box.createHorizontalGlue());
         hboxButtons.add(buttonCalc);
         hboxButtons.add(Box.createHorizontalStrut(30));
@@ -166,7 +204,7 @@ public class MainFrame extends JFrame {
         contentBox.add(Box.createVerticalGlue());
         getContentPane().add(contentBox, BorderLayout.CENTER);
     }
-    // Главный метод класса
+
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
