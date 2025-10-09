@@ -46,10 +46,11 @@ public class MainFrame extends JFrame {
         return  (Math.pow(y, 0.5) * 3 * Math.pow(z, x)) / Math.sqrt(1 + Math.pow(y, 3));
     }
 
-
+    private JPanel imagePane;
     // Вспомогательный метод для добавления кнопок на панель
     private void addRadioButton(String buttonName, final int formulaId) {
         JRadioButton button = new JRadioButton(buttonName);
+        imagePane = new JPanel();
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
@@ -83,6 +84,9 @@ public class MainFrame extends JFrame {
         JLabel labelForY = new JLabel("Y:");
         textFieldY = new JTextField("0", 10);
         textFieldY.setMaximumSize(textFieldY.getPreferredSize());
+        JLabel labelForZ = new JLabel("Z:");
+        textFieldZ = new JTextField("0", 10);
+        textFieldZ.setMaximumSize(textFieldZ.getPreferredSize());
         Box hboxVariables = Box.createHorizontalBox();
         hboxVariables.setBorder(
                 BorderFactory.createLineBorder(Color.RED));
@@ -94,6 +98,11 @@ public class MainFrame extends JFrame {
         hboxVariables.add(labelForY);
         hboxVariables.add(Box.createHorizontalStrut(10));
         hboxVariables.add(textFieldY);
+        hboxVariables.add(Box.createHorizontalGlue());
+        hboxVariables.add(Box.createHorizontalStrut(100));
+        hboxVariables.add(labelForZ);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldZ);
         hboxVariables.add(Box.createHorizontalGlue());
 // Создать область для вывода результата
         JLabel labelForResult = new JLabel("Результат:");
@@ -116,11 +125,12 @@ public class MainFrame extends JFrame {
 
                     Double x = Double.parseDouble(textFieldX.getText());
                     Double y = Double.parseDouble(textFieldY.getText());
+                    Double z = Double.parseDouble(textFieldZ.getText());
                     Double result;
                     if (formulaId==1)
-                        result = calculate1(x, y);
+                        result = calculate1(x, y, z);
                     else
-                        result = calculate2(x, y);
+                        result = calculate2(x, y, z);
                     textFieldResult.setText(result.toString());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(MainFrame.this,
@@ -134,6 +144,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent ev) {
                 textFieldX.setText("0");
                 textFieldY.setText("0");
+                textFieldZ.setText("0");
                 textFieldResult.setText("0");
             }
         });
