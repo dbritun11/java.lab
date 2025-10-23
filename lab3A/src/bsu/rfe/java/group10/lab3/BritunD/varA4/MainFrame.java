@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
         setLocation((kit.getScreenSize().width - WIDTH) / 2,
                 (kit.getScreenSize().height - HEIGHT) / 2);
 
-        // Меню
+        // Создать меню
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -99,6 +99,7 @@ public class MainFrame extends JFrame {
                     saveToGraphicsFile(fileChooser.getSelectedFile());
             }
         });
+
         saveToGraphicsMenuItem.setEnabled(false);
 
         searchValueMenuItem = tableMenu.add(new AbstractAction("Найти значение многочлена") {
@@ -208,7 +209,7 @@ public class MainFrame extends JFrame {
                 out.writeDouble((Double) data.getValueAt(i, 1));
             }
         } catch (Exception e) {
-            // Ошибку можно не обрабатывать
+            // ошибку можно не обрабатывать
         }
     }
 
@@ -227,7 +228,7 @@ public class MainFrame extends JFrame {
                 out.println("Значение в точке " + data.getValueAt(i, 0) + " равно " + data.getValueAt(i, 1));
             }
         } catch (FileNotFoundException e) {
-            // Ошибку можно не обрабатывать
+            // ошибку можно не обрабатывать
         }
     }
     public static void main(String[] args) {

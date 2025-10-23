@@ -30,7 +30,7 @@ public class GornerTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3; // X, значение многочлена, малое число?
+        return 3;
     }
 
     @Override
@@ -46,22 +46,30 @@ public class GornerTableModel extends AbstractTableModel {
             result = result * x + coefficients[i];
         }
 
-        return switch (col) {
-            case 0 -> x;
-            case 1 -> result;
-            case 2 -> Math.floor(Math.abs(result)) == 0;
-            default -> null;
-        };
+        switch (col) {
+            case 0:
+                return x;
+            case 1:
+                return result;
+            case 2:
+                return Math.floor(Math.abs(result)) == 0;
+            default:
+                return null;
+        }
     }
 
     @Override
     public String getColumnName(int col) {
-        return switch (col) {
-            case 0 -> "Значение X";
-            case 1 -> "Значение многочлена";
-            case 2 -> "Малое число?";
-            default -> "";
-        };
+        switch (col) {
+            case 0:
+                return "Значение X";
+            case 1:
+                return "Значение многочлена";
+            case 2:
+                return "Малое число?";
+            default:
+                return "";
+        }
     }
 
     @Override
