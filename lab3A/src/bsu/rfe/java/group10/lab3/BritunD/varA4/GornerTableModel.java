@@ -1,15 +1,16 @@
 package bsu.rfe.java.group10.lab3.BritunD.varA4;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class GornerTableModel extends AbstractTableModel {
-    private final Double[] coefficients;
+    private final List<Double> coefficients;
     private final double from;
     private final double to;
     private final double step;
 
-    public GornerTableModel(double from, double to, double step, Double[] coefficients) {
+    public GornerTableModel(double from, double to, double step, List<Double> coefficients) {
         this.from = from;
         this.to = to;
         this.step = step;
@@ -41,22 +42,20 @@ public class GornerTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col) {
         double x = from + step * row;
-        double result = coefficients[0];
-        for (int i = 1; i < coefficients.length; i++) {
-            result = result * x + coefficients[i];
+        //double result = coefficients[0];
+        double result = coefficients.get(0);
+        for (Double coefficient : coefficients.subList(1, coefficients.size())) {
+            result = result * x + coefficient;
         }
-
-        switch (col) {
-            case 0:
-                return x;
-            case 1:
-                return result;
-            case 2:
-                return Math.floor(Math.abs(result)) == 0;
-            default:
-                return null;
-        }
+        // for each
+        return switch (col) {
+            case 0 -> x;
+            case 1 -> result;
+            case 2 -> Math.floor(Math.abs(result)) == 0;
+            default -> null;
+        };
     }
+
 
     @Override
     public String getColumnName(int col) {

@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -152,7 +153,8 @@ public class MainFrame extends JFrame {
                     Double to = Double.parseDouble(textFieldTo.getText());
                     Double step = Double.parseDouble(textFieldStep.getText());
 
-                    data = new GornerTableModel(from, to, step, MainFrame.this.coefficients);
+                    data = new GornerTableModel(from, to, step, List.of(
+                            MainFrame.this.coefficients));
                     JTable table = new JTable(data);
                     table.setDefaultRenderer(Double.class, renderer);
                     table.setRowHeight(30);
