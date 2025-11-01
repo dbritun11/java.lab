@@ -1,5 +1,5 @@
 package bsu.rfe.java.group10.lab4.BritunD.varA4;
-//через буфер, сделать файл и туда сюда
+
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -54,25 +54,6 @@ public class MainFrame extends JFrame {
 // Добавить пункт меню "Файл"
         JMenu fileMenu = new JMenu("Файл");
         menuBar.add(fileMenu);
-
-        // Создать действие для генерации файла с координатами
-        /*Action generateFileAction = new AbstractAction("Сгенерировать файл") {
-            public void actionPerformed(ActionEvent event) {
-                try (DataOutputStream out = new DataOutputStream(new FileOutputStream("data.bin"))) {
-                    for (double x = -10; x <= 10; x += 0.5) {
-                        double y = Math.sin(x); // ← здесь ты задаёшь функцию вручную
-                        out.writeDouble(x);
-                        out.writeDouble(y);
-                    }
-                    JOptionPane.showMessageDialog(MainFrame.this, "Файл data.bin успешно создан!");
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(MainFrame.this, "Ошибка при создании файла", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        };
-
-// Добавить пункт меню "Сгенерировать файл"
-        fileMenu.add(generateFileAction);*/
 
 // Создать действие по открытию файла
         Action openGraphicsAction = new AbstractAction("Открыть файл с графиком") {
