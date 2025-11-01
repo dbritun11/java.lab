@@ -18,6 +18,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 @SuppressWarnings("serial")
@@ -52,6 +55,23 @@ public class MainFrame extends JFrame {
         JMenu fileMenu = new JMenu("Файл");
         menuBar.add(fileMenu);
 
+        Action generateFileAction = new AbstractAction("Сгенерировать файл") {
+            public void actionPerformed(ActionEvent event) {
+                try (DataOutputStream out = new DataOutputStream(new FileOutputStream("data.bin"))) {
+                    for (double x = -10; x <= 10; x += 0.5) {
+                        double y = Math.sin(x);
+                        out.writeDouble(x);
+                        out.writeDouble(y);
+                    }
+                    JOptionPane.showMessageDialog(MainFrame.this, "Файл data.bin успешно создан!");
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Ошибка при создании файла", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        };
+        fileMenu.add(generateFileAction);
+
+
 // Создать действие по открытию файла
         Action openGraphicsAction = new AbstractAction("Открыть файл с графиком") {
         public void actionPerformed(ActionEvent event) {
@@ -64,7 +84,6 @@ public class MainFrame extends JFrame {
                 openGraphics(fileChooser.getSelectedFile());
         }
     };
-
 
 
 // Добавить соответствующий элемент меню

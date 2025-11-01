@@ -1,5 +1,5 @@
 package bsu.rfe.java.group10.lab4.BritunD.varA4;
-
+//
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
