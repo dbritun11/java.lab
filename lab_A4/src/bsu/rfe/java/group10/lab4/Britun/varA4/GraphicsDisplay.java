@@ -1,4 +1,4 @@
-package bsu.rfe.java.group10.lab4.BritunD.varA4;
+package bsu.rfe.java.group10.lab4.Britun.varA4;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
