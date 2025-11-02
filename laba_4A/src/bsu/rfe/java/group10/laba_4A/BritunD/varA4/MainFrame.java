@@ -1,4 +1,4 @@
-package bsu.rfe.java.group10.lab4.Britun.varA4;
+package bsu.rfe.java.group10.laba_4A.BritunD.varA4;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
