@@ -84,8 +84,6 @@ public class MainFrame extends JFrame {
             }
         };
 
-
-
 // Добавить соответствующий элемент меню
         fileMenu.add(openGraphicsAction);
         // Создать пункт меню "График"

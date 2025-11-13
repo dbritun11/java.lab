@@ -175,18 +175,19 @@ minY
                 canvas.setColor(Color.GREEN);
                 canvas.setPaint(Color.GREEN);
 
-                canvas.fill(new Rectangle2D.Double(x, y - 4, 3, 3));
-                canvas.fill(new Rectangle2D.Double(x + 5, y - 4, 3, 3));
-                canvas.fill(new Rectangle2D.Double(x + 10, y - 4, 3, 3));
+                canvas.setStroke(new BasicStroke(2.5f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f, new float[]{3, 6, 3, 6, 12, 6, 0,5, 6, 0,5, 6}, 0));
 
-                canvas.fill(new Rectangle2D.Double(x + 15, y - 2, 12, 3));
+                canvas.draw(new Line2D.Double(pt, next));
 
-                canvas.fill(new Rectangle2D.Double(x + 30, y + 1, 4, 1));
-                canvas.fill(new Rectangle2D.Double(x + 36, y + 1, 4, 1));
+
             } else {
                 canvas.setColor(Color.RED);
                 canvas.setPaint(Color.RED);
+                canvas.setColor(Color.RED);
+                canvas.setPaint(Color.RED);
+                canvas.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{10, 2}, 0));
                 canvas.draw(new Line2D.Double(pt, next));
+
             }
         }
     }
@@ -201,8 +202,8 @@ minY
             Point2D.Double center = xyToPoint(point[0], point[1]);
 
             boolean highlight = ((int)Math.floor(point[1]) % 2 != 0);
-            canvas.setColor(highlight ? Color.DARK_GRAY : Color.BLACK);
-            canvas.setPaint(highlight ? Color.DARK_GRAY : Color.BLACK);
+            canvas.setColor(highlight ? Color.GREEN : Color.RED);
+            canvas.setPaint(highlight ? Color.GREEN : Color.RED);
 
             int size = 11;
             int half = size / 2;
